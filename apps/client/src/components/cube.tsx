@@ -20,7 +20,7 @@ const Cube: React.FC = () => {
 
   return (
     <div className="h-full">
-      <svg viewBox="-1, -1.1, 2.2, 2.2" className="-scale-y-100 h-full">
+      <svg viewBox="-1, -1.1, 2.2, 2.2" className="h-full -scale-y-100">
         {/* left */}
         <polygon
           points={[O, D, E, F].map((coord) => toCoordString(coord)).join(' ')}
@@ -45,7 +45,7 @@ const Cube: React.FC = () => {
           }
           className={clsx('transition-all duration-1000', {
             'fill-turquoise-800': !animating,
-            ' fill-turquoise-500': animating,
+            'fill-turquoise-500': animating,
           })}
         ></polygon>
 
@@ -53,7 +53,7 @@ const Cube: React.FC = () => {
         <polygon
           points={[A, B, O, F].map((coord) => toCoordString(coord)).join(' ')}
           transform={animating ? 'translate(0, -1.01)' : 'translate(0, 0.01)'}
-          className={clsx('transition-all duration-1000 fill-turquoise-300')}
+          className={clsx('fill-turquoise-300 transition-all duration-1000')}
         ></polygon>
       </svg>
     </div>
