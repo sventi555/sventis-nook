@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Poppins';
-  src: local('Poppins'), url('./assets/fonts/Poppins.ttf');
+  font-family: 'Rubik';
+  src: local('Rubik'), url('./assets/fonts/Rubik.ttf');
 }
 
 body {
-  font-family: 'Poppins';
+  font-family: 'Rubik';
   height: 100vh;
 }
 
