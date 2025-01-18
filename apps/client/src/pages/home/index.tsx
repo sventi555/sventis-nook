@@ -1,6 +1,6 @@
-import Cube from '../components/cube';
+import Cube from './components/cube';
 
-const Home: React.FC = () => {
+const Page: React.FC = () => {
   return (
     <div className="flex flex-col items-center gap-8 pt-24">
       <div className="h-[300px]">
@@ -11,4 +11,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Page;

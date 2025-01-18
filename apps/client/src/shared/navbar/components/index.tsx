@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 import { Link, useLocation } from 'wouter';
+import { navbarHeight } from '../constants';
 
 interface NavLinkProps {
   url: string;
@@ -13,7 +14,7 @@ const NavLink: React.FC<PropsWithChildren<NavLinkProps>> = ({
   children,
 }) => {
   return (
-    <Link href={url} className={clsx('text-lg', { 'text-yellow-950': active })}>
+    <Link href={url} className={clsx('text-lg', { 'text-selection': active })}>
       {children}
     </Link>
   );
@@ -21,10 +22,12 @@ const NavLink: React.FC<PropsWithChildren<NavLinkProps>> = ({
 
 const Navbar: React.FC = () => {
   const [location] = useLocation();
-  console.log(location);
 
   return (
-    <nav className="sticky top-0 z-10 flex w-full gap-6 bg-blue-950 p-4 shadow-md">
+    <nav
+      className="sticky top-0 z-10 flex w-full items-center gap-6 bg-background px-4 shadow-md"
+      style={{ height: navbarHeight }}
+    >
       <NavLink url="/" active={location === '/'}>
         Home
       </NavLink>

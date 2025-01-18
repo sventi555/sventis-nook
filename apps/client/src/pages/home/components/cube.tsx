@@ -30,8 +30,8 @@ const Cube: React.FC = () => {
               : 'translate(-0.01, -0.01)'
           }
           className={clsx('transition-all duration-1000', {
-            'fill-blue-600': !animating,
-            'fill-blue-700': animating,
+            'fill-cube-3': !animating,
+            'fill-cube-2': animating,
           })}
         ></polygon>
 
@@ -44,8 +44,8 @@ const Cube: React.FC = () => {
               : 'translate(0.01, -0.01)'
           }
           className={clsx('transition-all duration-1000', {
-            'fill-blue-800': !animating,
-            'fill-blue-500': animating,
+            'fill-cube-1': !animating,
+            'fill-cube-4': animating,
           })}
         ></polygon>
 
@@ -53,7 +53,7 @@ const Cube: React.FC = () => {
         <polygon
           points={[A, B, O, F].map((coord) => toCoordString(coord)).join(' ')}
           transform={animating ? 'translate(0, -1.01)' : 'translate(0, 0.01)'}
-          className="fill-blue-200 transition-all duration-1000"
+          className="fill-cube-5 transition-all duration-1000"
         ></polygon>
       </svg>
     </div>
