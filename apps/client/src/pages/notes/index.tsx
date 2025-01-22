@@ -19,13 +19,13 @@ const Page: React.FC = () => {
   });
 
   return (
-    <div>
+    <div className="relative">
       <NoteList
         sidebarOpen={sidebarOpen}
         sidebarAnimating={sidebarAnimating}
         overlayOpen={overlayOpen}
         selectedNoteId={selectedNoteId}
-        setSelectedNoteId={(id) => {
+        onClickNote={(id) => {
           setSelectedNoteId(id);
           setOverlayOpen(false);
         }}
@@ -43,7 +43,7 @@ const Page: React.FC = () => {
         }}
         sidebarAnimating={sidebarAnimating}
         overlayOpen={overlayOpen}
-        setOverlayOpen={() => setOverlayOpen(true)}
+        openOverlay={() => setOverlayOpen(true)}
         selectedNoteId={selectedNoteId}
       />
     </div>

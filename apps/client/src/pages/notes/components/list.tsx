@@ -11,7 +11,7 @@ interface NoteListProps {
   sidebarAnimating: boolean;
   overlayOpen: boolean;
   selectedNoteId: string | undefined;
-  setSelectedNoteId: (noteId: string) => void;
+  onClickNote: (noteId: string) => void;
 }
 
 const NoteList: React.FC<NoteListProps> = ({
@@ -19,7 +19,7 @@ const NoteList: React.FC<NoteListProps> = ({
   sidebarAnimating,
   overlayOpen,
   selectedNoteId,
-  setSelectedNoteId,
+  onClickNote,
 }) => {
   const { data: notePreviews } = useQuery({
     queryKey: [],
@@ -30,9 +30,9 @@ const NoteList: React.FC<NoteListProps> = ({
 
   useEffect(() => {
     if (!selectedNoteId && notePreviews) {
-      setSelectedNoteId(notePreviews[0].id);
+      onClickNote(notePreviews[0].id);
     }
-  }, [notePreviews, selectedNoteId, setSelectedNoteId]);
+  }, [notePreviews, selectedNoteId, onClickNote]);
 
   return (
     <div
@@ -44,7 +44,7 @@ const NoteList: React.FC<NoteListProps> = ({
         } as CSSProperties
       }
       className={clsx(
-        'absolute h-[calc(100vh-var(--navbar-height))] w-full overflow-y-auto p-3 sm:w-[--sidebar-width] sm:border-r sm:border-separator',
+        'absolute top-0 z-10 h-[calc(100vh-var(--navbar-height))] w-full overflow-y-auto p-3 scrollbar-thin scrollbar-track-background scrollbar-thumb-text-sub sm:w-[--sidebar-width] sm:border-r sm:border-separator',
         {
           'sm:visible': sidebarOpen,
           'sm:invisible sm:-translate-x-[--sidebar-width]': !sidebarOpen,
@@ -58,7 +58,7 @@ const NoteList: React.FC<NoteListProps> = ({
         selectedKeys={selectedNoteId ? [selectedNoteId] : []}
         selectionMode="single"
         onSelectionChange={([noteId]) => {
-          setSelectedNoteId((noteId ?? selectedNoteId) as string);
+          onClickNote((noteId ?? selectedNoteId) as string);
         }}
         aria-label="Note selector"
       >

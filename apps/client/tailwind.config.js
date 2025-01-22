@@ -23,5 +23,5 @@ export default {
       rubik: ['Rubik'],
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };

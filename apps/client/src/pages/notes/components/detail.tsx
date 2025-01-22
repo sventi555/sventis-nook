@@ -1,6 +1,9 @@
+import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { CSSProperties } from 'react';
+import { Button } from 'react-aria-components';
 import PageContainer from '../../../shared/components/page-container';
 import { sidebarSlideDuration, sidebarWidth } from '../constants';
 import { notes } from '../data';
@@ -10,7 +13,7 @@ interface NoteDetailProps {
   toggleSidebarOpen: () => void;
   sidebarAnimating: boolean;
   overlayOpen: boolean;
-  setOverlayOpen: () => void;
+  openOverlay: () => void;
   selectedNoteId: string | undefined;
 }
 
@@ -19,7 +22,7 @@ const NoteDetail: React.FC<NoteDetailProps> = ({
   toggleSidebarOpen,
   sidebarAnimating,
   overlayOpen,
-  setOverlayOpen,
+  openOverlay,
   selectedNoteId,
 }) => {
   const { data: selectedNote } = useQuery({
@@ -30,32 +33,42 @@ const NoteDetail: React.FC<NoteDetailProps> = ({
     enabled: selectedNoteId != null,
   });
 
-  console.log(sidebarAnimating);
-
   return (
-    <div className={clsx('sm:block', { hidden: overlayOpen })}>
+    <div
+      style={
+        {
+          '--sidebar-width': sidebarWidth,
+          '--sidebar-duration': sidebarSlideDuration,
+        } as CSSProperties
+      }
+      className={clsx('relative sm:block', { hidden: overlayOpen })}
+    >
+      <Button
+        className={clsx(
+          'absolute left-4 top-4 flex h-fit rounded-md text-sm hover:text-selection',
+          {
+            'sm:ml-[--sidebar-width]': sidebarOpen,
+            'sm:transition-[margin] sm:duration-[--sidebar-duration]':
+              sidebarAnimating,
+          },
+        )}
+        onPress={() => {
+          toggleSidebarOpen();
+          openOverlay();
+        }}
+      >
+        <FontAwesomeIcon className="size-6" icon={faBars} />
+      </Button>
       {/* TODO: loading UI */}
       {selectedNote && (
         <PageContainer>
           <div
-            style={
-              {
-                '--sidebar-width': sidebarWidth,
-                '--sidebar-duration': sidebarSlideDuration,
-              } as CSSProperties
-            }
-            className={clsx('flex flex-col gap-2', {
+            className={clsx('mt-6 flex flex-col gap-2', {
               'sm:ml-[--sidebar-width]': sidebarOpen,
               'sm:transition-[margin] sm:duration-[--sidebar-duration]':
                 sidebarAnimating,
             })}
           >
-            <button className="hidden sm:block" onClick={toggleSidebarOpen}>
-              toggle sidebar
-            </button>
-            <button className="sm:hidden" onClick={setOverlayOpen}>
-              open overlay
-            </button>
             <div className="flex justify-between">
               <h1 className="text-3xl">{selectedNote.title}</h1>
               <div className="font-light text-text-sub">
